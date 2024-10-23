@@ -1,0 +1,97 @@
+LED BLINKING -->
+                   CONNECTIONS : 
+                                 LED -> TO -> RASPBERRYPI
+                                -------------------------------------
+                                 VCC   -->    #40 (GPIO 21 (PCM_DOUT)) 
+                                 GND   -->    #39 (GROUND)  
+                                -------------------------------------
+
+CODE EXECUTION ON TERMINAL -->
+STEP 1 :-  // CREATE NEW FOLDER NAME -temp
+STEP 2 :-  // RIGHT CLICK ON FOLDER AND CLICK TO OPEN IN TERMINAL
+STEP 3 :-  // WRITE A CODE INTO AN TERMINAL 
+           eg.. pi@raspberrypi:~/temp $ git clone https://github.com/sasukee004/led
+STEP 4 :-  // AFTER THE COMPLETE CLONING GIT INTO TERMINAL RUN THE PROGRAM 
+           -> pi@raspberrypi:~/temp $ cd led
+STEP 5 :-  -> pi@raspberrypi:~/temp/led $ python blink.py 
+PRACTICAL DONE SUCCESSFULLY 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SEVEN SEGMENT -->
+                        CONNECTIONS : 
+                                 4-digit   --> TO --> RASPBERRYPI
+                                 seven seg
+                                -------------------------------------
+                                 VCC       -->    #4 (5v power)
+                                 GND       -->    #6 (ground)
+                                 clock     -->    #7 (GPIO 4(GPCLKO))
+                                 DIO       -->    #29 (GPIO 5)
+                                -------------------------------------
+
+CODE EXECUTION ON TERMINAL -->
+STEP 1 :-  // CREATE NEW FOLDER eg..4DigitTimes (or anything)
+STEP 2 :-  // RIGHT CLICK ON FOLDER AND CLICK TO OPEN IN TERMINAL
+STEP 3 :-  // WRITE A CODE INTO AN TERMINAL 
+           eg.. pi@raspberrypi:~/4DigitTimes $ git clone https://github.com/sasukee004/4seg
+STEP 4 :-  // AFTER THE COMPLETE CLONING GIT INTO TERMINAL RUN THE PROGRAM 
+           -> pi@raspberrypi:~/temp $ cd 4seg
+STEP 5 :-  -> pi@raspberrypi:~/temp/led $ python clock.py 
+PRACTICAL DONE SUCCESSFULLY
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CAMERA -->
+                       CONNECTIONS : CONNECT CAMERA -->TO--> RASPBERRYPI (CSI CAMERA PORT)
+
+CODE EXECUTION ON TERMINAL -->
+STEP1 :-  pi@raspberrypi :~ $ sudo raspi-config       // Enable the Camera Boot up your Raspberry Pi.
+STEP2 :-  SELECT INTERFACING OPTION --> CAMERA --> ENABLE    // Navigate to Interfacing Options > Camera and select Enable.
+STEP3 :-  pi@raspberrypi :~ $ sudo reboot         //Reboot your Raspberry Pi.
+STEP4 :-  // CREATE A NEW FOLDER (home/pi/desktop/VISITORS) which is used to store picture captured by pi camera..
+STEP5 :-  // WRITE A PYTHON SCRIPT TO CAPTURED IMAGE AND SAVE THEM IN FOLDER eg..picamera.py or as well your choice 
+          PYTHON CODE (picamera.py):- 
+                         import time
+                         import picamera
+                         camera = picamera.PiCamera()
+                         camera.resolution(1024, 768)
+                         camera.start_preview()
+                         time.sleep(2)
+                         camera.capture('test.jpg')
+                         camera.stop_preview()
+STEP6 :-  pi@raspberrypi :~ $ cd VISITORS
+STEP7 :-  pi@raspberrypi :~ /VISITORS $ sudo apt-get install python-picamera                    <---|   
+                            /VISITORS $ sudo apt-get install python3-picamera                   <---|   
+                            /VISITORS $ sudo pip install picamera                               <---| 
+                            
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GPS -->
+
+STEPS :- 
+
+step1:- update RaspberryPI
+pi@raspberrypi:-$ sudo apt-get update/upgrade
+step2:- edit the boot/config.text file
+pi@raspberrypi:-$ sudo nano/boot/config.txt
+dtparam=spi=on 
+dtoverlay=pi3-disable-bt 
+core freq=250 
+enable_uart=1 
+force_turbo-1
+step3 :-Reboot RaspberryPi using the command sudo reboot
+step 4:-stop and disable the pi's serial ttySO service
+sudo systemctl stop serial-getty@ttyS0.service 
+sudo systemctl disable serial-getty@ttyS0.service
+The following commands can be used to enable it again if needed
+sudo systemctl start serial-getty@ttyS0.service 
+sudo systemctl enable serial-getty@ttyS0.service
+step5 :-Reboot RaspberryPi using the command sudo reboot
+Step6:Enable the ttyAMA0 services
+pi@raspberrypi:- sudo systemctl enable serial-getty@ttyAMA0.service
+Step 7:Install minicom 
+pi@raspberrypi:-sudo apt-get install minicom
+now run the following command:
+pi@raspberrypi:- sudo cat/dev/ttyAMA0 
+
